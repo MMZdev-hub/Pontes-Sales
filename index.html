@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pontes e Sales — Advocacia & Assessoria Jurídica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Cinzel:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --wine: #3D0C1A;
+    --wine-deep: #260814;
+    --wine-mid: #5A1628;
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-pale: #F5E6C4;
+    --cream: #FAF6EE;
+    --text-dark: #1A0A0E;
+    --text-light: #FAF6EE;
+    --font-display: 'Cinzel', serif;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'Lato', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--wine-deep);
+    color: var(--text-light);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(22, 4, 10, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,.18);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: .18em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-sans);
+    font-size: .78rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--gold-pale);
+    text-decoration: none;
+    opacity: .8;
+    transition: opacity .2s, color .2s;
+  }
+
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--font-sans);
+    font-size: .78rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    padding: .55rem 1.4rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .2s, color .2s;
+  }
+
+  .nav-cta:hover { background: var(--gold); color: var(--wine-deep); }
+
+  /* ---------- HERO ---------- */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 5% 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 30%, rgba(90,22,40,.55) 0%, transparent 70%),
+      linear-gradient(180deg, var(--wine-deep) 0%, #1e050d 100%);
+  }
+
+  .hero-ornament {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(900px, 95vw);
+    height: min(900px, 95vw);
+    border: 1px solid rgba(201,168,76,.06);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-ornament::before {
+    content: '';
+    position: absolute;
+    inset: 40px;
+    border: 1px solid rgba(201,168,76,.08);
+    border-radius: 50%;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 820px; }
+
+  .hero-eyebrow {
+    font-family: var(--font-sans);
+    font-size: .72rem;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp .8s .2s forwards;
+  }
+
+  .hero-monogram {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 1.6rem;
+    opacity: 0;
+    animation: fadeUp .8s .1s forwards;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 7vw, 5.5rem);
+    font-weight: 600;
+    line-height: 1.05;
+    color: var(--gold-pale);
+    margin-bottom: .5rem;
+    opacity: 0;
+    animation: fadeUp .9s .35s forwards;
+  }
+
+  .hero-title span { color: var(--gold); }
+
+  .hero-subtitle {
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 2.2vw, 1.4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(245,230,196,.65);
+    letter-spacing: .08em;
+    margin-bottom: 2.8rem;
+    opacity: 0;
+    animation: fadeUp .9s .5s forwards;
+  }
+
+  .hero-desc {
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    line-height: 1.85;
+    color: rgba(245,230,196,.75);
+    max-width: 640px;
+    margin: 0 auto 3rem;
+    opacity: 0;
+    animation: fadeUp .9s .65s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp .9s .8s forwards;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--wine-deep);
+    font-family: var(--font-sans);
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: 1rem 2.4rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background .2s, transform .15s;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold-pale);
+    font-family: var(--font-sans);
+    font-size: .8rem;
+    font-weight: 400;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: 1rem 2.4rem;
+    text-decoration: none;
+    border: 1px solid rgba(245,230,196,.35);
+    cursor: pointer;
+    transition: border-color .2s, color .2s;
+  }
+
+  .btn-outline:hover { border-color: var(--gold-pale); color: #fff; }
+
+  /* ---------- DIVIDER ---------- */
+  .gold-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+  .gold-divider::before, .gold-divider::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    opacity: .5;
+  }
+
+  .gold-divider-diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 6rem 5%; }
+
+  .section-label {
+    font-family: var(--font-sans);
+    font-size: .72rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 500;
+    color: var(--gold-pale);
+    text-align: center;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-intro {
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.9;
+    color: rgba(245,230,196,.7);
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 4rem;
+  }
+
+  /* ---------- AREAS ---------- */
+  #areas { background: var(--wine-deep); }
+
+  .areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    max-width: 1100px;
+    margin: 0 auto;
+    border: 1.5px solid rgba(201,168,76,.18);
+  }
+
+  .area-card {
+    padding: 3rem 2.5rem;
+    background: rgba(255,255,255,.02);
+    border: 1.5px solid rgba(201,168,76,.1);
+    transition: background .3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .area-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--gold);
+    transition: height .4s;
+  }
+
+  .area-card:hover::before { height: 100%; }
+  .area-card:hover { background: rgba(201,168,76,.05); }
+
+  .area-icon {
+    font-size: 2rem;
+    margin-bottom: 1.4rem;
+    display: block;
+  }
+
+  .area-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: .12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .area-text {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(245,230,196,.68);
+  }
+
+  /* ---------- TEAM ---------- */
+  #equipe { background: #1c060d; }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    border: 1px solid rgba(201,168,76,.18);
+    position: relative;
+  }
+
+  .team-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--wine-mid);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    letter-spacing: .05em;
+  }
+
+  .team-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: .12em;
+    color: var(--gold-pale);
+    margin-bottom: .3rem;
+  }
+
+  .team-oab {
+    font-family: var(--font-sans);
+    font-size: .72rem;
+    letter-spacing: .2em;
+    color: var(--gold);
+    opacity: .8;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .team-bio {
+    font-family: var(--font-serif);
+    font-size: .98rem;
+    line-height: 1.85;
+    color: rgba(245,230,196,.65);
+  }
+
+  /* ---------- DIFERENCIAIS ---------- */
+  #diferenciais { background: var(--wine-deep); }
+
+  .dif-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .dif-item { text-align: center; }
+
+  .dif-number {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: .5rem;
+  }
+
+  .dif-label {
+    font-family: var(--font-sans);
+    font-size: .78rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(245,230,196,.6);
+  }
+
+  /* ---------- CTA STRIP ---------- */
+  #cta-strip {
+    background: var(--gold);
+    padding: 4.5rem 5%;
+    text-align: center;
+  }
+
+  .cta-strip-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-weight: 600;
+    color: var(--wine-deep);
+    margin-bottom: 1rem;
+  }
+
+  .cta-strip-text {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: rgba(26,10,14,.75);
+    margin-bottom: 2.2rem;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-dark {
+    background: var(--wine-deep);
+    color: var(--gold);
+    font-family: var(--font-sans);
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: 1rem 2.6rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background .2s;
+    margin: .4rem;
+  }
+
+  .btn-dark:hover { background: #0d0205; }
+
+  /* ---------- CONTATO ---------- */
+  #contato { background: #1c060d; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 2rem;
+    border: 1px solid rgba(201,168,76,.15);
+    transition: border-color .3s;
+  }
+
+  .contact-item:hover { border-color: rgba(201,168,76,.45); }
+
+  .contact-icon {
+    font-size: 1.5rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: .1rem;
+  }
+
+  .contact-label {
+    font-family: var(--font-sans);
+    font-size: .7rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: .8;
+    margin-bottom: .4rem;
+  }
+
+  .contact-value {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--gold-pale);
+    text-decoration: none;
+    line-height: 1.6;
+  }
+
+  a.contact-value:hover { color: var(--gold); }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--wine-deep);
+    border-top: 1px solid rgba(201,168,76,.15);
+    padding: 2.5rem 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: .88rem;
+    letter-spacing: .18em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .footer-copy {
+    font-family: var(--font-sans);
+    font-size: .72rem;
+    color: rgba(245,230,196,.35);
+    letter-spacing: .08em;
+  }
+
+  .footer-social a {
+    color: rgba(245,230,196,.4);
+    font-size: .75rem;
+    letter-spacing: .15em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+
+  .footer-social a:hover { color: var(--gold); }
+
+  /* ---------- ANIMATIONS ---------- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 760px) {
+    nav { padding: 1rem 4%; }
+    .nav-links { display: none; }
+    footer { flex-direction: column; align-items: center; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Pontes &amp; Sales</div>
+  <ul class="nav-links">
+    <li><a href="#areas">Áreas</a></li>
+    <li><a href="#equipe">Equipe</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="https://api.whatsapp.com/send?phone=5571983989398" target="_blank" class="nav-cta">Consulta Online</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ornament"></div>
+  <div class="hero-content">
+
+    <!-- Monogram SVG -->
+    <svg class="hero-monogram" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="45" cy="45" r="43" stroke="#C9A84C" stroke-width="1"/>
+      <text x="45" y="60" text-anchor="middle" font-family="'Cinzel', serif" font-size="38" font-weight="600" fill="#C9A84C">PS</text>
+    </svg>
+
+    <p class="hero-eyebrow">Advocacia &amp; Assessoria Jurídica</p>
+    <h1 class="hero-title">Pontes<span> e </span>Sales</h1>
+    <p class="hero-subtitle">Segurança jurídica com ética, técnica e estratégia</p>
+    <p class="hero-desc">
+      Escritório especializado em Direito do Consumidor, Trabalhista e Previdenciário. Atendimento 100% online em todo o Brasil, com foco em resultado e relação próxima com cada cliente.
+    </p>
+    <div class="hero-actions">
+      <a href="https://api.whatsapp.com/send?phone=5571983989398" target="_blank" class="btn-primary">Falar com uma advogada</a>
+      <a href="#areas" class="btn-outline">Nossas áreas</a>
+    </div>
+  </div>
+</section>
+
+<!-- ÁREAS -->
+<section id="areas">
+  <p class="section-label reveal">O que fazemos</p>
+  <h2 class="section-title reveal">Nossas Áreas de Atuação</h2>
+  <p class="section-intro reveal">
+    Atuamos com dedicação em três pilares do direito, sempre prezando pela proteção efetiva dos nossos clientes e pela transparência em cada etapa do processo.
+  </p>
+
+  <div class="areas-grid reveal">
+    <div class="area-card">
+      <span class="area-icon">⚖️</span>
+      <h3 class="area-title">Direito do Consumidor</h3>
+      <p class="area-text">
+        Demandas contra bancos, concessionárias de energia, água, telecomunicações, seguros e demais relações de consumo. Buscamos a efetiva reparação dos danos sofridos e a prevenção de abusos.
+      </p>
+    </div>
+
+    <div class="area-card">
+      <span class="area-icon">🤝</span>
+      <h3 class="area-title">Direito do Trabalho</h3>
+      <p class="area-text">
+        <strong style="color:var(--gold-pale);font-weight:400">Para o Trabalhador:</strong> reconhecimento de vínculo, rescisões, verbas trabalhistas, assédio moral e direitos coletivos.<br><br>
+        <strong style="color:var(--gold-pale);font-weight:400">Para Empresas:</strong> consultoria preventiva, gestão trabalhista e redução de riscos.
+      </p>
+    </div>
+
+    <div class="area-card">
+      <span class="area-icon">📋</span>
+      <h3 class="area-title">Direito Previdenciário</h3>
+      <p class="area-text">
+        Especialização em aposentadorias, auxílios e revisões de benefícios. Asseguramos que cada cliente tenha acesso aos direitos garantidos pela legislação, com sensibilidade e técnica em cada etapa.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPE -->
+<section id="equipe">
+  <p class="section-label reveal">Quem somos</p>
+  <h2 class="section-title reveal">Nossa Equipe</h2>
+  <div class="gold-divider reveal" style="margin-bottom:4rem"><div class="gold-divider-diamond"></div></div>
+
+  <div class="team-grid">
+    <div class="team-card reveal">
+      <div class="team-avatar">FP</div>
+      <h3 class="team-name">Dra. Francine Pontes</h3>
+      <p class="team-oab">OAB/BA 76.671</p>
+      <p class="team-bio">
+        Pós-graduada em Direito e Processo do Trabalho. Atuação técnica e estratégica em rescisões, verbas trabalhistas, reconhecimento de vínculo, assédio moral e direitos coletivos. Com vasta experiência em Direito do Consumidor e mediação de conflitos, contribui para soluções céleres e eficazes.
+      </p>
+    </div>
+
+    <div class="team-card reveal">
+      <div class="team-avatar">JS</div>
+      <h3 class="team-name">Dra. Jéssica Sales</h3>
+      <p class="team-oab">OAB/BA 60.274</p>
+      <p class="team-bio">
+        Pós-graduada em Direito Penal, Previdenciário e do Consumidor. Atua com alta técnica e sensibilidade em demandas previdenciárias — aposentadorias, auxílios e revisão de benefícios. Possui formação técnica em Segurança do Trabalho, ampliando sua expertise nas relações laborais.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais" style="border-top: 1px solid rgba(201,168,76,.1);">
+  <p class="section-label reveal">Por que nos escolher</p>
+  <h2 class="section-title reveal">Nossos Diferenciais</h2>
+  <div class="gold-divider reveal" style="margin-bottom:4rem"><div class="gold-divider-diamond"></div></div>
+
+  <div class="dif-grid">
+    <div class="dif-item reveal">
+      <div class="dif-number">100%</div>
+      <div class="dif-label">Online em todo o Brasil</div>
+    </div>
+    <div class="dif-item reveal">
+      <div class="dif-number">2</div>
+      <div class="dif-label">Advogadas especializadas</div>
+    </div>
+    <div class="dif-item reveal">
+      <div class="dif-number">3</div>
+      <div class="dif-label">Áreas de atuação</div>
+    </div>
+    <div class="dif-item reveal">
+      <div class="dif-number">∞</div>
+      <div class="dif-label">Compromisso com o cliente</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section id="cta-strip">
+  <p class="cta-strip-title">Seus direitos têm quem os defenda.</p>
+  <p class="cta-strip-text">Consultas e acompanhamento de processos de forma 100% online, com abrangência em todo o Brasil.</p>
+  <a href="https://api.whatsapp.com/send?phone=5571983989398" target="_blank" class="btn-dark">Agendar Consulta no WhatsApp</a>
+  <a href="mailto:pontesesalesadvocacia@gmail.com" class="btn-dark" style="background: rgba(26,10,14,.12); color: var(--wine-deep); border: 1px solid rgba(26,10,14,.3);">Enviar e-mail</a>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <p class="section-label reveal">Fale conosco</p>
+  <h2 class="section-title reveal">Contato</h2>
+  <div class="gold-divider reveal" style="margin-bottom:3.5rem"><div class="gold-divider-diamond"></div></div>
+
+  <div class="contact-grid">
+    <div class="contact-item reveal">
+      <span class="contact-icon">📱</span>
+      <div>
+        <p class="contact-label">WhatsApp</p>
+        <a href="https://api.whatsapp.com/send?phone=5571983989398" target="_blank" class="contact-value">
+          (71) 9 8398-9398<br>(71) 9 9364-4949
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-item reveal">
+      <span class="contact-icon">✉️</span>
+      <div>
+        <p class="contact-label">E-mail</p>
+        <a href="mailto:pontesesalesadvocacia@gmail.com" class="contact-value">pontesesalesadvocacia@gmail.com</a>
+      </div>
+    </div>
+
+    <div class="contact-item reveal">
+      <span class="contact-icon">📸</span>
+      <div>
+        <p class="contact-label">Instagram</p>
+        <a href="https://instagram.com/pontesesales_advocacia" target="_blank" class="contact-value">@pontesesales_advocacia</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Pontes &amp; Sales</div>
+  <p class="footer-copy">© 2025 Pontes e Sales Advocacia &amp; Assessoria Jurídica. Todos os direitos reservados.</p>
+  <div class="footer-social">
+    <a href="https://instagram.com/pontesesales_advocacia" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
